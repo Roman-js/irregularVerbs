@@ -1,50 +1,25 @@
 import React, { FC } from "react";
-import { Dimensions, Image, ImageBackground, StyleSheet, Text, TouchableHighlight, View } from "react-native";
-import SafeAreaView from 'react-native-safe-area-view';
+import { FlatList } from "react-native";
 import LinearGradient from 'react-native-linear-gradient';
+import { lessonContent } from "../../constants/lessonContent";
+import { StepImage } from "../../components/StepImage/StepImage";
+import { colors } from "../../constants/colors";
+import { styles } from "./styles";
 
-const HomeScreen: FC = () => {
+export const HomeScreen: FC = () => {
 
     return (
-        <LinearGradient colors={['#4c669f', '#ccb654', '#FFFFFF']} style={styles.linearGradient}>
-
-            <ImageBackground source={require('../../assets/imgs/wingLeft.png')} style={{ width: 150, height: 150, marginRight: 75 }}>
-                <View style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}>
-                    <Text style={{ color: 'white', fontSize: 24 }}>4</Text>
-                </View>
-            </ImageBackground>
-            <ImageBackground source={require('../../assets/imgs/wingRight.png')} style={{ width: 150, height: 150, marginLeft: 75 }}>
-                <View style={{ position: 'absolute', top: 0, right: 0, bottom: 0 }}>
-                    <Text style={{ color: 'white', fontSize: 24 }}>3</Text>
-                </View>
-            </ImageBackground>
-            <ImageBackground source={require('../../assets/imgs/wingLeftCompleted.png')} style={{ width: 150, height: 150, marginRight: 75 }}>
-                <View style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}>
-                    <Text style={{ color: 'white', fontSize: 24 }}>2</Text>
-                </View>
-            </ImageBackground>
-            <ImageBackground source={require('../../assets/imgs/wingRightCompleted.png')} style={{ width: 150, height: 150, marginLeft: 75 }}>
-                <View style={{ position: 'absolute', top: 0, right: 0, bottom: 0 }}>
-                    <Text style={{ color: 'white', fontSize: 24 }}>1</Text>
-                </View>
-            </ImageBackground>
+        <LinearGradient colors={colors.firstArrayOfGradients} style={styles.linearGradient}>
+            <FlatList
+                style={{ marginHorizontal: 20 }}
+                keyExtractor={(item, index) => index.toString()}
+                data={lessonContent}
+                inverted={true}
+                showsVerticalScrollIndicator={false}
+                renderItem={({ item, index }) =>
+                    <StepImage item={item} index={index} />
+                }
+            />
         </LinearGradient>
     )
 };
-
-const styles = StyleSheet.create({
-    wrapper: {
-        flex: 1,
-        backgroundColor: '#A5F8D3',
-    },
-    linearGradient: {
-        flex: 1,
-        paddingLeft: 15,
-        paddingRight: 15,
-        borderRadius: 5,
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-})
-
-export default HomeScreen
