@@ -1,5 +1,6 @@
-import { SetTestActionType, TESTACTION } from "./actionTypes";
+import { SetAvailableStepActionType, AVAILABLESTEPACTION } from "./actionTypes";
 
-export const setTestAction = (): SetTestActionType => ({
-    type: TESTACTION
+export const setTestAction = (payload: number): SetAvailableStepActionType => ({
+    type: AVAILABLESTEPACTION,
+    payload
 });

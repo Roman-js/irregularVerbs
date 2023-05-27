@@ -1,7 +1,8 @@
-export const TESTACTION = 'TESTACTION'
+export const AVAILABLESTEPACTION = 'AVAILABLESTEPACTION'
 
-export type SetTestActionType = {
-    type: typeof TESTACTION
+export type SetAvailableStepActionType = {
+    type: typeof AVAILABLESTEPACTION,
+    payload: number
 };
 
-export type ActionTypes = SetTestActionType;
+export type ActionTypes = SetAvailableStepActionType;

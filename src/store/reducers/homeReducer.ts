@@ -1,18 +1,18 @@
-import { ActionTypes, TESTACTION } from "../actions/actionTypes";
+import { ActionTypes, AVAILABLESTEPACTION } from "../actions/actionTypes";
 
 type homeReducerType = {
-    test: number
+    availableStep: number
 }
 
 const initialState: homeReducerType = {
-    test: 0
+    availableStep: 4
 }
 
 export const homeReducer = (state = initialState, action: ActionTypes) => {
 
     switch (action.type) {
-        case TESTACTION:
-            return { ...state, test: state.test + 1 }
+        case AVAILABLESTEPACTION:
+            return { ...state, availableStep: action.payload }
         default:
             return state
     }
