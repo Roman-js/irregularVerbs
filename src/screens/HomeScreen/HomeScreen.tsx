@@ -5,19 +5,23 @@ import { lessonContent } from "../../constants/lessonContent";
 import { StepImage } from "../../components/StepImage/StepImage";
 import { colors } from "../../constants/colors";
 import { styles } from "./styles";
+import { useSelector } from "react-redux";
+import { AppStateType } from "../../store/store";
 
 export const HomeScreen: FC = () => {
+
+    const { availableStep } = useSelector((state: AppStateType) => state.home)
 
     return (
         <LinearGradient colors={colors.firstArrayOfGradients} style={styles.linearGradient}>
             <FlatList
-                style={{ marginHorizontal: 20 }}
                 keyExtractor={(item, index) => index.toString()}
+                style={styles.flatListStyle}
+                contentContainerStyle={styles.flatListContainer}
                 data={lessonContent}
                 inverted={true}
-                showsVerticalScrollIndicator={false}
                 renderItem={({ item, index }) =>
-                    <StepImage item={item} index={index} />
+                    <StepImage item={item} index={index} availableStep={availableStep}/>
                 }
             />
         </LinearGradient>
