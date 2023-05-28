@@ -1,5 +1,10 @@
-import React, { FC } from "react";
-import { ImageBackground} from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import React, { FC, useCallback } from "react";
+import { ImageBackground, TouchableOpacity } from "react-native";
+import { useDispatch } from "react-redux";
+import { HomeTabParamList } from "../../navigations/HomeNavigation/HomeTab";
+import { setCurrentLessonAction, setCurrentStepAction } from "../../store/actions/actions";
 import { STATUSSTEP } from "../../types/commonTypes";
 import { ExerciseType } from "../../types/lessonContentTypes";
 import { StepNumber } from "../StepNumber/StepNumber";
@@ -13,12 +18,23 @@ type StepImageType = {
 
 export const StepImage: FC<StepImageType> = ({ item, index, availableStep }) => {
 
-    const renderStepItemLayout = (item: ExerciseType[], index: number, availableStep: number) => {
+    const modifyIndex = index + 1;
 
-        const getStatus =
-        availableStep === index ? STATUSSTEP.ACTIVE
-                : availableStep > index ? STATUSSTEP.COMPLETED
-                    : STATUSSTEP.DISABLED
+    const navigation = useNavigation<StackNavigationProp<HomeTabParamList>>();
+    const dispatch = useDispatch();
+
+    const goToLessonScreen = useCallback(() => {
+        dispatch(setCurrentLessonAction(item));
+        dispatch(setCurrentStepAction(modifyIndex));
+        navigation.navigate('LessonScreen');
+    }, [navigation])
+
+    const getStatus =
+        availableStep === modifyIndex ? STATUSSTEP.ACTIVE
+            : availableStep > modifyIndex ? STATUSSTEP.COMPLETED
+                : STATUSSTEP.DISABLED
+
+    const renderStepItemLayout = (index: number, availableStep: number) => {
 
         const isLeftPosition = index % 2;
 
@@ -91,7 +107,11 @@ export const StepImage: FC<StepImageType> = ({ item, index, availableStep }) => 
         };
     };
 
-    return <>
-        {renderStepItemLayout(item, index + 1, availableStep)}
-    </>
+    return (
+        <TouchableOpacity
+            onPress={goToLessonScreen}
+            disabled={getStatus === STATUSSTEP.DISABLED}>
+            {renderStepItemLayout(modifyIndex, availableStep)}
+        </TouchableOpacity>
+    )
 };

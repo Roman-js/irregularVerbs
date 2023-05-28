@@ -16,9 +16,10 @@ export const HomeScreen: FC = () => {
         <LinearGradient colors={colors.firstArrayOfGradients} style={styles.linearGradient}>
             <FlatList
                 keyExtractor={(item, index) => index.toString()}
+                style={styles.flatListStyle}
+                contentContainerStyle={styles.flatListContainer}
                 data={lessonContent}
                 inverted={true}
-                showsVerticalScrollIndicator={false}
                 renderItem={({ item, index }) =>
                     <StepImage item={item} index={index} availableStep={availableStep}/>
                 }

@@ -5,9 +5,10 @@ export const colors = {
   completed: '#E2B609',
   active: '#028310',
   disabled: '#000000',
-  
-  lightPeach: '#ffe9df',
-  peach: '#f79263',
+  yellow: '#FF9F00',
+  lightBlue: '#C1E8FF',
+  orange: '#D74214',
+
   grey: '#999999',
   darkGrey: '#747474',
   cloudyBlue: '#bcc6cf',
