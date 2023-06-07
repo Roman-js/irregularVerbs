@@ -1,8 +1,11 @@
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import React, { FC, useCallback } from "react";
-import { ImageBackground, TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native";
 import { useDispatch } from "react-redux";
+import StepLeft from "../../assets/svg/steps/StepLeft";
+import StepRight from "../../assets/svg/steps/StepRight";
+import { colors } from "../../constants/colors";
 import { HomeTabParamList } from "../../navigations/HomeNavigation/HomeTab";
 import { setCurrentLessonAction, setCurrentStepAction } from "../../store/actions/actions";
 import { STATUSSTEP } from "../../types/commonTypes";
@@ -34,84 +37,36 @@ export const StepImage: FC<StepImageType> = ({ item, index, availableStep }) => 
             : availableStep > modifyIndex ? STATUSSTEP.COMPLETED
                 : STATUSSTEP.DISABLED
 
-    const renderStepItemLayout = (index: number, availableStep: number) => {
+    const renderStepItemLayout = (index: number) => {
 
         const isLeftPosition = index % 2;
 
-        if (isLeftPosition) {
-            if (getStatus === STATUSSTEP.ACTIVE) {
-                return <ImageBackground
-                    source={require('../../assets/imgs/wingLeftCurrent.png')}
-                    style={styles.leftImage}>
-                    <StepNumber
-                        position={isLeftPosition}
-                        stepNumber={index}
-                        status={getStatus}
-                    />
-                </ImageBackground>
-            }
-            else if (getStatus === STATUSSTEP.COMPLETED) {
-                return <ImageBackground
-                    source={require('../../assets/imgs/wingLeftCompleted.png')}
-                    style={styles.leftImage}>
-                    <StepNumber
-                        position={isLeftPosition}
-                        stepNumber={index}
-                        status={getStatus}
-                    />
-                </ImageBackground>
-            } else {
-                return <ImageBackground
-                    source={require('../../assets/imgs/wingLeft.png')}
-                    style={styles.leftImage}>
-                    <StepNumber
-                        position={isLeftPosition}
-                        stepNumber={index}
-                        status={getStatus}
-                    />
-                </ImageBackground>
-            };
-        } else {
-            if (getStatus === STATUSSTEP.ACTIVE) {
-                return <ImageBackground
-                    source={require('../../assets/imgs/wingRightCurrent.png')}
-                    style={styles.rightImage}>
-                    <StepNumber
-                        position={isLeftPosition}
-                        stepNumber={index}
-                        status={getStatus}
-                    />
-                </ImageBackground>
-            }
-            if (getStatus === STATUSSTEP.COMPLETED) {
-                return <ImageBackground
-                    source={require('../../assets/imgs/wingRightCompleted.png')}
-                    style={styles.rightImage}>
-                    <StepNumber
-                        position={isLeftPosition}
-                        stepNumber={index}
-                        status={getStatus}
-                    />
-                </ImageBackground>
-            } else {
-                return <ImageBackground
-                    source={require('../../assets/imgs/wingRight.png')}
-                    style={styles.rightImage}>
-                    <StepNumber
-                        position={isLeftPosition}
-                        stepNumber={index}
-                        status={getStatus}
-                    />
-                </ImageBackground>
-            };
-        };
+        const stepColor =
+            getStatus === STATUSSTEP.ACTIVE ? colors.active
+                : getStatus === STATUSSTEP.COMPLETED ? colors.completed
+                    : colors.disabled
+
+        const step = isLeftPosition
+            ? <StepLeft style={styles.leftImage} color={stepColor} />
+            : <StepRight style={styles.rightImage} color={stepColor} />;
+
+        return (
+            <>
+                <StepNumber
+                    position={isLeftPosition}
+                    stepNumber={index}
+                    status={getStatus}
+                />
+                {step}
+            </>
+        )
     };
 
     return (
         <TouchableOpacity
             onPress={goToLessonScreen}
             disabled={getStatus === STATUSSTEP.DISABLED}>
-            {renderStepItemLayout(modifyIndex, availableStep)}
+            {renderStepItemLayout(modifyIndex)}
         </TouchableOpacity>
     )
 };

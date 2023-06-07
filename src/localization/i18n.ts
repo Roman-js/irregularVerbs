@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { resources } from './langs';
 import { FALLBACK_LANG, STORE_LANG_KEY } from '../constants/lang';
+import { locale } from '../utils/locale';
 
 const languageDetector: LanguageDetectorAsyncModule = {
   type: 'languageDetector',
@@ -18,7 +19,8 @@ const languageDetector: LanguageDetectorAsyncModule = {
   },
   cacheUserLanguage: async function (language: string) {
     try {
-      await AsyncStorage.setItem(STORE_LANG_KEY, language);
+      const userLanguage = language !== locale ? locale : language;
+      await AsyncStorage.setItem(STORE_LANG_KEY, userLanguage);
     } catch (error) {
       console.log('Error writting language', error);
     }

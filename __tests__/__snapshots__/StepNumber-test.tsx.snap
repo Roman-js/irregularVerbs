@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home Screen snapShot 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "alignSelf": "center",
+        "borderColor": "#E2B609",
+        "borderRadius": 17,
+        "borderWidth": 4,
+        "bottom": 0,
+        "height": 34,
+        "justifyContent": "center",
+        "left": 0,
+        "position": "absolute",
+        "top": 0,
+        "width": 34,
+      },
+      Object {
+        "borderColor": "#028310",
+      },
+    ]
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "#ffffff",
+        "fontSize": 18,
+        "textAlign": "center",
+      }
+    }
+  >
+    1
+  </Text>
+</View>
+`;
