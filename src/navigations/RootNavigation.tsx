@@ -21,7 +21,12 @@ export type TabStackParamList = {
 const Router: FC = () => {
 
   const Tab = createBottomTabNavigator<TabStackParamList>();
-  const { setHideTabNavigation, styleTabLabel, hideTabNavigation } = useRootNavigation();
+  const {
+    setHideTabNavigation,
+    styleTabLabel,
+    hideTabNavigation,
+    styleTabIcon
+  } = useRootNavigation();
 
   return (
     <NavigationContainer
@@ -44,15 +49,10 @@ const Router: FC = () => {
               </Typography.H3>
             ),
             tabBarIcon: ({ focused }) => (
-              focused
-                ? <Image
-                  source={require('../assets/tabs/homeColor.gif')}
-                  style={styles.tabStyle}
-                />
-                : <Image
-                  source={require('../assets/tabs/homeColorStatic.png')}
-                  style={styles.tabStyle}
-                />
+              <Image
+                source={styleTabIcon(focused, 'Home')}
+                style={styles.tabStyle}
+              />
             ),
             tabBarStyle: { display: hideTabNavigation ? "none" : "flex" }
           }}
@@ -69,15 +69,10 @@ const Router: FC = () => {
               </Typography.H3>
             ),
             tabBarIcon: ({ focused }) => (
-              focused
-                ? <Image
-                  source={require('../assets/tabs/settings.gif')}
-                  style={styles.tabStyle}
-                />
-                : <Image
-                  source={require('../assets/tabs/settingsStatic.png')}
-                  style={styles.tabStyle}
-                />
+              <Image
+                source={styleTabIcon(focused, 'Profile')}
+                style={styles.tabStyle}
+              />
             ),
             tabBarStyle: { display: hideTabNavigation ? "none" : "flex" }
           }}

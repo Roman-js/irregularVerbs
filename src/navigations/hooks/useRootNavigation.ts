@@ -26,9 +26,22 @@ export const useRootNavigation = () => {
     const styleTabLabel = (focused: boolean) =>
         focused ? colors.yellow : colors.darkGrey;
 
+    const styleTabIcon = (focused: boolean, tabName: string) => {
+        if (tabName === 'Home') {
+            return focused
+                ? require('../../assets/tabs/homeColor.gif')
+                : require('../../assets/tabs/homeColorStatic.png')
+        } else if (tabName === 'Profile') {
+            return focused
+                ? require('../../assets/tabs/settings.gif')
+                : require('../../assets/tabs/settingsStatic.png')
+        };
+    };
+
     return {
         setHideTabNavigation,
         styleTabLabel,
-        hideTabNavigation
+        hideTabNavigation,
+        styleTabIcon
     }
 }
