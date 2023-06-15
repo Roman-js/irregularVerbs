@@ -53,7 +53,7 @@
     "preset": "react-native",
     
     "setupFiles": [
-      "<rootDir>/testSetup.js"
+      "<rootDir>/testSetup.ts"
     ],
     "transformIgnorePatterns": [
       "node_modules/(?!(@react-native|react-native|react-native-iphone-x-helper|react-native-shimmer-placeholder|react-navigation|@react-navigation/.*|react-native-linear-gradient|react-native-progress|react-native-raw-bottom-sheet|@react-native-voice/voice|@types/react-native-vector-icons|react-native-vector-icons)/)"

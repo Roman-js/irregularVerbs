@@ -2,8 +2,8 @@ import 'react-native';
 import React from 'react';
 
 import renderer from 'react-test-renderer';
-import { StepNumber } from '../src/components/StepNumber/StepNumber';
-import { STATUSSTEP } from '../src/types/commonTypes';
+import { StepNumber } from '../StepNumber';
+import { STATUSSTEP } from '../../../types/commonTypes';
 
 it('Home Screen snapShot', () => {
   const snap = renderer.create(
