@@ -3,9 +3,9 @@ import translationFR from './fr/fr.lang.json';
 
 export const resources = {
   en: {
-    translation: translationEN
+    translation: translationEN,
   },
   fr: {
-    translation: translationFR
-  }
+    translation: translationFR,
+  },
 };

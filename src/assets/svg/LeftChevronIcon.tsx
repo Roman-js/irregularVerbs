@@ -1,6 +1,6 @@
 import React from 'react';
-import Svg, { G, Path, SvgProps } from 'react-native-svg';
-import { colors } from '../../constants/colors';
+import Svg, {G, Path, SvgProps} from 'react-native-svg';
+import {colors} from '../../constants/colors';
 
 const LeftChevronIcon = (props: SvgProps) => (
   <Svg width="35" height="35" viewBox="0 0 24 24" {...props}>
@@ -27,4 +27,4 @@ const LeftChevronIcon = (props: SvgProps) => (
   </Svg>
 );
 
-export default LeftChevronIcon
+export default LeftChevronIcon;

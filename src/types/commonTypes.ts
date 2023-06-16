@@ -1,5 +1,5 @@
 export enum STATUSSTEP {
-    COMPLETED = 'completed',
-    ACTIVE = 'active',
-    DISABLED = 'disabled',
-  };
+  COMPLETED = 'completed',
+  ACTIVE = 'active',
+  DISABLED = 'disabled',
+}
