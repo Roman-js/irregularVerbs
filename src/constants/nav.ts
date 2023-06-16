@@ -1,8 +1,6 @@
-import { HomeTabParamList } from "../navigations/HomeNavigation/HomeTab";
-import { TabStackParamList } from "../navigations/RootNavigation";
+import {HomeTabParamList} from '../navigations/HomeNavigation/HomeTab';
+import {TabStackParamList} from '../navigations/RootNavigation';
 
-type HideTabScreensData = keyof (HomeTabParamList & TabStackParamList)
+type HideTabScreensData = keyof (HomeTabParamList & TabStackParamList);
 
-export const HIDED_TAB_SCREENS_DATA:HideTabScreensData[] = [
-  'LessonScreen',
-]
+export const HIDED_TAB_SCREENS_DATA: HideTabScreensData[] = ['LessonScreen'];

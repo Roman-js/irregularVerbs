@@ -1,3 +1,3 @@
-import * as Typography from './Typography'
+import * as Typography from './Typography';
 
-export default Typography
+export default Typography;

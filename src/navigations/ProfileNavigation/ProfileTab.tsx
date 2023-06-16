@@ -1,16 +1,13 @@
-import React from "react";
-import { createStackNavigator } from "@react-navigation/stack";
+import React from 'react';
+import {createStackNavigator} from '@react-navigation/stack';
 
-export type ProfileTabParamList = {
+export type ProfileTabParamList = {};
 
-}
-
+//@typescript-eslint/no-unused-vars: off
 const HomeTabStack = createStackNavigator<ProfileTabParamList>();
 
-const ProfileTab = () =>{
-
-    return <>
-    </>
+const ProfileTab = () => {
+  return <></>;
 };
 
-export default ProfileTab
+export default ProfileTab;

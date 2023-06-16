@@ -1,10 +1,10 @@
-import i18n, { LanguageDetectorAsyncModule } from 'i18next';
-import { initReactI18next } from 'react-i18next';
+import i18n, {LanguageDetectorAsyncModule} from 'i18next';
+import {initReactI18next} from 'react-i18next';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { resources } from './langs';
-import { FALLBACK_LANG, STORE_LANG_KEY } from '../constants/lang';
-import { locale } from '../utils/locale';
+import {resources} from './langs';
+import {FALLBACK_LANG, STORE_LANG_KEY} from '../constants/lang';
+import {locale} from '../utils/locale';
 
 const languageDetector: LanguageDetectorAsyncModule = {
   type: 'languageDetector',
@@ -24,7 +24,7 @@ const languageDetector: LanguageDetectorAsyncModule = {
     } catch (error) {
       console.log('Error writting language', error);
     }
-  }
+  },
 };
 
 i18n
@@ -35,9 +35,9 @@ i18n
     resources,
     fallbackLng: FALLBACK_LANG,
     interpolation: {
-      escapeValue: false
+      escapeValue: false,
     },
     react: {
-      useSuspense: false
-    }
+      useSuspense: false,
+    },
   });
