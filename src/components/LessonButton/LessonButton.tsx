@@ -9,17 +9,26 @@ type LessonButtonProps = {
   onPress: () => void;
   buttonStyle?: StyleProp<ViewStyle>;
   title: string;
+  disabled?: boolean;
 };
 
 export const LessonButton: FC<LessonButtonProps> = ({
   onPress,
   buttonStyle,
   title,
+  disabled,
 }) => {
   return (
-    <TouchableOpacity style={[styles.container, buttonStyle]} onPress={onPress}>
+    <TouchableOpacity
+      style={[styles.container, buttonStyle]}
+      onPress={onPress}
+      disabled={disabled}>
       <LinearGradient
-        colors={colors.secondArrayOfGradients}
+        colors={
+          disabled
+            ? colors.thirdArrayOfGradients
+            : colors.secondArrayOfGradients
+        }
         style={styles.gradient}>
         <Typography.H3>{title}</Typography.H3>
       </LinearGradient>

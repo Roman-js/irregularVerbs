@@ -1,4 +1,4 @@
-import 'react-native-gesture-handler/jestSetup';
+//import 'react-native-gesture-handler/jestSetup';
 import {AppStateType} from './src/store/store';
 
 const templates: AppStateType = {
