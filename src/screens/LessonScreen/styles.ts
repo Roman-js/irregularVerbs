@@ -52,7 +52,7 @@ export const styles = StyleSheet.create({
   },
   soundContainer: {
     flexDirection: 'row',
+    flexWrap: 'wrap',
     justifyContent: 'space-around',
-    alignItems: 'center',
   },
 });

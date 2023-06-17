@@ -65,7 +65,7 @@ export const StepImage: FC<StepImageType> = ({
       <>
         <StepNumber
           position={isLeftPosition}
-          stepNumber={index}
+          stepNumber={modifyIndex}
           status={getStatus}
         />
         {step}
