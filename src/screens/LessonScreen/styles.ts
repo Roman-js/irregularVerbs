@@ -39,11 +39,20 @@ export const styles = StyleSheet.create({
     borderBottomRightRadius: 60,
     borderWidth: 1,
     borderTopColor: 'transparent',
+    shadowOffset: {width: 1, height: 1},
+    shadowColor: colors.black,
+    shadowOpacity: 1,
+    elevation: 3,
   },
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: 15,
+  },
+  soundContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
   },
 });

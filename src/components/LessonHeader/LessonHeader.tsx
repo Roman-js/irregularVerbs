@@ -16,9 +16,8 @@ export const LessonHeader = () => {
   const navigation = useNavigation<StackNavigationProp<HomeTabParamList>>();
   const dispatch = useDispatch();
 
-  const state = useSelector((states: AppStateType) => states);
-  const {currentStep} = state.home;
-  const {soundAvailable} = state.lesson;
+  const {currentStep} = useSelector((states: AppStateType) => states.home);
+  const {soundAvailable} = useSelector((states: AppStateType) => states.lesson);
 
   const goToThePrevPage = () => {
     navigation.goBack();

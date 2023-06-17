@@ -1,6 +1,7 @@
 export const colors = {
   firstArrayOfGradients: ['#4c669f', '#ccb654', '#f3eeea'],
   secondArrayOfGradients: ['#48AFAF', '#63CDCC', '#97D8D8'],
+  thirdArrayOfGradients: ['#009688', '#009688', '#009688'],
 
   white: '#ffffff',
   black: '#000000',
@@ -10,6 +11,7 @@ export const colors = {
   yellow: '#FF9F00',
   lightBlue: '#D4E1FE',
   orange: '#D74214',
+  orangeLight: '#FFE7E6',
   skinColor: '#FCEDE1',
 
   grey: '#999999',
