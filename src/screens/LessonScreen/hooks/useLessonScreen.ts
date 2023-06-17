@@ -1,12 +1,20 @@
 import {useState, useCallback} from 'react';
 import {useTranslation} from 'react-i18next';
+import {useNavigation} from '@react-navigation/native';
+import {useDispatch, useSelector} from 'react-redux';
+import {StackNavigationProp} from '@react-navigation/stack';
 import Sound from 'react-native-sound';
-import {useSelector} from 'react-redux';
 import {soundRequires} from '../../../constants/soundRequires';
 import {verbContent} from '../../../constants/verbContent';
 import {AppStateType} from '../../../store/store';
 import {VerbType} from '../../../types/lessonContentTypes';
 import {locale} from '../../../utils/locale';
+import {
+  setAvailableStepAction,
+  setCurrentLessonAction,
+} from '../../../store/actions/actions';
+
+import {HomeTabParamList} from '../../../navigations/HomeNavigation/HomeTab';
 
 type LoacalStateType = {
   currentQuestion: number;
@@ -16,20 +24,26 @@ type LoacalStateType = {
 
 export const useLessonScreen = () => {
   const {t} = useTranslation();
+  const dispatch = useDispatch();
+  const navigation = useNavigation<StackNavigationProp<HomeTabParamList>>();
+
+  const {currentLesson, currentStep, availableStep} = useSelector(
+    (state: AppStateType) => state.home,
+  );
+  const {soundAvailable} = useSelector((state: AppStateType) => state.lesson);
+
+  const getRandomQuestion = (): number =>
+    Math.floor(Math.random() * (currentLesson.length - 1));
 
   const [localState, setLocalState] = useState<LoacalStateType>({
-    currentQuestion: 0,
+    currentQuestion: getRandomQuestion() || 0,
     inputValue: '',
     showPronunciation: false,
   });
 
   const {currentQuestion, inputValue, showPronunciation} = localState;
-
-  const {currentLesson} = useSelector((state: AppStateType) => state.home);
-  const {soundAvailable} = useSelector((state: AppStateType) => state.lesson);
   const {verbid, form} = currentLesson[currentQuestion];
 
-  //count of questions is equal 12
   const activeQuestion: VerbType =
     verbContent.find(question => question.verbid === verbid) || verbContent[0];
 
@@ -62,20 +76,28 @@ export const useLessonScreen = () => {
   const onPressSkip = () => {
     setLocalState({
       ...localState,
-      currentQuestion: localState.currentQuestion + 1,
+      currentQuestion: getRandomQuestion(),
       inputValue: '',
     });
   };
 
   const onPressContinue = () => {
-    if (inputValue === formWord) {
-      setLocalState({
-        ...localState,
-        currentQuestion: localState.currentQuestion + 1,
-        inputValue: '',
-        showPronunciation: false,
-      });
+    if (currentLesson.length === 1 && availableStep === currentStep) {
+      dispatch(setAvailableStepAction(currentStep + 1));
+      navigation.navigate('HomeScreen');
+      return;
     }
+
+    setLocalState({
+      ...localState,
+      currentQuestion: getRandomQuestion(),
+      inputValue: '',
+      showPronunciation: false,
+    });
+    const removeCurrentQuestion = currentLesson.filter(
+      (question, index) => index !== currentQuestion,
+    );
+    dispatch(setCurrentLessonAction(removeCurrentQuestion));
   };
 
   const setInputValueToLowerCase = useCallback(

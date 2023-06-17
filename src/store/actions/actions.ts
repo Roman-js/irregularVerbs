@@ -12,7 +12,9 @@ import {
   setHideTabNavigationType,
 } from './actionTypes';
 
-export const setTestAction = (payload: number): SetAvailableStepActionType => ({
+export const setAvailableStepAction = (
+  payload: number,
+): SetAvailableStepActionType => ({
   type: AVAILABLESTEPACTION,
   payload,
 });
