@@ -15,7 +15,7 @@ type homeReducerType = {
 };
 
 const initialState: homeReducerType = {
-  availableStep: 4,
+  availableStep: 1,
   currentStep: 1,
   currentLesson: [],
   hideTabNavigation: false,

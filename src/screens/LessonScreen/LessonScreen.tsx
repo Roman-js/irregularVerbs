@@ -6,6 +6,8 @@ import Typography from '../../components/Typography';
 import {LessonButton} from '../../components/LessonButton/LessonButton';
 import {SoundButton} from '../../components/SoundButton/SoundButton';
 import {VerbType} from '../../types/lessonContentTypes';
+import * as Progress from 'react-native-progress';
+import {colors} from '../../constants/colors';
 
 export const LessonScreen = () => {
   const {
@@ -21,6 +23,7 @@ export const LessonScreen = () => {
     soundPlay,
     showPronunciation,
     onPressContinue,
+    progressBarValue,
   } = useLessonScreen();
 
   return (
@@ -36,6 +39,14 @@ export const LessonScreen = () => {
         <Typography.H3>{t(`Placeholder.v${form}`)}</Typography.H3>
         <Typography.H3>{t(`Placeholder.${placeholder}`)}</Typography.H3>
       </View>
+
+      <Progress.Bar
+        progress={progressBarValue}
+        width={null}
+        color={colors.green}
+        height={4}
+        style={styles.progress}
+      />
 
       {showPronunciation ? (
         <View style={styles.soundContainer}>

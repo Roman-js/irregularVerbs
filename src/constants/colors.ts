@@ -13,6 +13,7 @@ export const colors = {
   orange: '#D74214',
   orangeLight: '#FFE7E6',
   skinColor: '#FCEDE1',
+  green: '#36C562',
 
   grey: '#999999',
   darkGrey: '#747474',

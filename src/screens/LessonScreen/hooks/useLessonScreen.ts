@@ -15,6 +15,7 @@ import {
 } from '../../../store/actions/actions';
 
 import {HomeTabParamList} from '../../../navigations/HomeNavigation/HomeTab';
+import {setSavedStep} from '../../../utils/savedSteps';
 
 type LoacalStateType = {
   currentQuestion: number;
@@ -43,6 +44,7 @@ export const useLessonScreen = () => {
 
   const {currentQuestion, inputValue, showPronunciation} = localState;
   const {verbid, form} = currentLesson[currentQuestion];
+  const progressBarValue = 1 - currentLesson.length / 12;
 
   const activeQuestion: VerbType =
     verbContent.find(question => question.verbid === verbid) || verbContent[0];
@@ -67,8 +69,8 @@ export const useLessonScreen = () => {
   };
 
   const onPressCheck = () => {
+    setLocalState({...localState, showPronunciation: true});
     if (inputValue === formWord) {
-      setLocalState({...localState, showPronunciation: true});
       soundAvailable && soundPlay(inputValue);
     }
   };
@@ -82,8 +84,11 @@ export const useLessonScreen = () => {
   };
 
   const onPressContinue = () => {
-    if (currentLesson.length === 1 && availableStep === currentStep) {
-      dispatch(setAvailableStepAction(currentStep + 1));
+    if (currentLesson.length === 1) {
+      const numberOfNextStep = currentStep + 1;
+      availableStep === currentStep &&
+        dispatch(setAvailableStepAction(numberOfNextStep));
+      availableStep < numberOfNextStep && setSavedStep(numberOfNextStep);
       navigation.navigate('HomeScreen');
       return;
     }
@@ -94,10 +99,13 @@ export const useLessonScreen = () => {
       inputValue: '',
       showPronunciation: false,
     });
-    const removeCurrentQuestion = currentLesson.filter(
-      (question, index) => index !== currentQuestion,
-    );
-    dispatch(setCurrentLessonAction(removeCurrentQuestion));
+
+    if (inputValue === formWord) {
+      const removeCurrentQuestion = currentLesson.filter(
+        (question, index) => index !== currentQuestion,
+      );
+      dispatch(setCurrentLessonAction(removeCurrentQuestion));
+    }
   };
 
   const setInputValueToLowerCase = useCallback(
@@ -122,6 +130,7 @@ export const useLessonScreen = () => {
     onPressContinue,
     soundPlay,
     showPronunciation,
+    progressBarValue,
     t,
   };
 };

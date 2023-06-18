@@ -1,13 +1,25 @@
+import {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {colors} from '../../constants/colors';
 import {HIDED_TAB_SCREENS_DATA} from '../../constants/nav';
-import {setHideTabNavigationAction} from '../../store/actions/actions';
+import {
+  setHideTabNavigationAction,
+  setAvailableStepAction,
+} from '../../store/actions/actions';
 import {AppStateType} from '../../store/store';
 import {navRef} from '../../utils/rootNav';
+import {getSavedStep} from '../../utils/savedSteps';
 
 export const useRootNavigation = () => {
   const dispatch = useDispatch();
   const {hideTabNavigation} = useSelector((state: AppStateType) => state.home);
+
+  useEffect(() => {
+    (async () => {
+      const savedStep: string = (await getSavedStep()) || '1';
+      dispatch(setAvailableStepAction(Number(savedStep)));
+    })();
+  }, [dispatch]);
 
   const setHideTabNavigation = () => {
     const currentRoute = navRef?.current?.getCurrentRoute()?.name;
