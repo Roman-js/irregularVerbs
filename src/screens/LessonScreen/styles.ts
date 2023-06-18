@@ -55,4 +55,5 @@ export const styles = StyleSheet.create({
     flexWrap: 'wrap',
     justifyContent: 'space-around',
   },
+  progress: {margin: 10},
 });
