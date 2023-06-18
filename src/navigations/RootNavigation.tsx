@@ -12,6 +12,7 @@ import Typography from '../components/Typography';
 import {navRef} from '../utils/rootNav';
 import {useRootNavigation} from './hooks/useRootNavigation';
 import {styles} from './styles/styles';
+import { SplashScreen } from '../screens/SplashScreen/SplashScreen';
 
 export type TabStackParamList = {
   Home: NavigatorScreenParams<HomeTabParamList>;
@@ -20,8 +21,18 @@ export type TabStackParamList = {
 
 const Router: FC = () => {
   const Tab = createBottomTabNavigator<TabStackParamList>();
-  const {setHideTabNavigation, styleTabLabel, hideTabNavigation, styleTabIcon} =
-    useRootNavigation();
+  const {
+    setHideTabNavigation,
+    styleTabLabel,
+    hideTabNavigation,
+    styleTabIcon,
+    loading,
+    setIsLoading,
+  } = useRootNavigation();
+
+  if (loading) return(
+    <SplashScreen setIsLoading={setIsLoading}/>
+  )
 
   return (
     <NavigationContainer ref={navRef} onStateChange={setHideTabNavigation}>

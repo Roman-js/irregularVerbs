@@ -1,4 +1,4 @@
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {colors} from '../../constants/colors';
 import {HIDED_TAB_SCREENS_DATA} from '../../constants/nav';
@@ -13,6 +13,7 @@ import {getSavedStep} from '../../utils/savedSteps';
 export const useRootNavigation = () => {
   const dispatch = useDispatch();
   const {hideTabNavigation} = useSelector((state: AppStateType) => state.home);
+  const [loading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     (async () => {
@@ -54,5 +55,7 @@ export const useRootNavigation = () => {
     styleTabLabel,
     hideTabNavigation,
     styleTabIcon,
+    loading,
+    setIsLoading,
   };
 };
