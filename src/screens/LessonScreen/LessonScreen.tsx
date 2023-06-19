@@ -1,5 +1,5 @@
 import React from 'react';
-import {ImageBackground, TextInput, View} from 'react-native';
+import {ImageBackground, TextInput} from 'react-native';
 import {styles} from './styles';
 import {useLessonScreen} from './hooks/useLessonScreen';
 import Typography from '../../components/Typography';
@@ -8,6 +8,12 @@ import {SoundButton} from '../../components/SoundButton/SoundButton';
 import {VerbType} from '../../types/lessonContentTypes';
 import * as Progress from 'react-native-progress';
 import {colors} from '../../constants/colors';
+import Animated, {
+  Layout,
+  LightSpeedInRight,
+  LightSpeedInLeft,
+  SlideOutDown,
+} from 'react-native-reanimated';
 
 export const LessonScreen = () => {
   const {
@@ -24,21 +30,29 @@ export const LessonScreen = () => {
     showPronunciation,
     onPressContinue,
     progressBarValue,
+    bounceAnimatedStyles,
   } = useLessonScreen();
 
   return (
     <ImageBackground
       source={require('../../assets/imgs/lessonBackground.jpg')}
       style={styles.wrapper}>
-      <View style={styles.questionContainer}>
+      <Animated.View
+        style={[styles.questionContainer]}
+        entering={LightSpeedInLeft.duration(1500)}
+        exiting={SlideOutDown.duration(1500)}
+        layout={Layout.springify()}>
         <Typography.H1>{activeQuestion.v1}</Typography.H1>
         <Typography.H2>{translation}</Typography.H2>
-      </View>
+      </Animated.View>
 
-      <View style={styles.placeholderContainer}>
+      <Animated.View
+        style={[styles.placeholderContainer]}
+        entering={LightSpeedInRight.duration(1500)} //delay задержка, duration is speed
+        layout={Layout.springify()}>
         <Typography.H3>{t(`Placeholder.v${form}`)}</Typography.H3>
         <Typography.H3>{t(`Placeholder.${placeholder}`)}</Typography.H3>
-      </View>
+      </Animated.View>
 
       <Progress.Bar
         progress={progressBarValue}
@@ -49,7 +63,7 @@ export const LessonScreen = () => {
       />
 
       {showPronunciation ? (
-        <View style={styles.soundContainer}>
+        <Animated.View style={[styles.soundContainer]}>
           {Array(3)
             .fill('')
             .map((value, index) => (
@@ -66,7 +80,7 @@ export const LessonScreen = () => {
                 }
               />
             ))}
-        </View>
+        </Animated.View>
       ) : (
         <TextInput
           style={styles.input}
@@ -79,7 +93,7 @@ export const LessonScreen = () => {
           onChangeText={setInputValueToLowerCase}
         />
       )}
-      <View style={styles.buttonContainer}>
+      <Animated.View style={[styles.buttonContainer, bounceAnimatedStyles]}>
         <LessonButton
           onPress={onPressSkip}
           title={t('Main.skip')}
@@ -90,7 +104,7 @@ export const LessonScreen = () => {
         ) : (
           <LessonButton onPress={onPressCheck} title={t('Main.check')} />
         )}
-      </View>
+      </Animated.View>
     </ImageBackground>
   );
 };
