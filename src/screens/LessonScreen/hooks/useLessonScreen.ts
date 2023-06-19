@@ -16,6 +16,7 @@ import {
 
 import {HomeTabParamList} from '../../../navigations/HomeNavigation/HomeTab';
 import {setSavedStep} from '../../../utils/savedSteps';
+import {AnimationFeatures} from '../../../utils/animations';
 
 type LoacalStateType = {
   currentQuestion: number;
@@ -32,6 +33,7 @@ export const useLessonScreen = () => {
     (state: AppStateType) => state.home,
   );
   const {soundAvailable} = useSelector((state: AppStateType) => state.lesson);
+  const {bounceAnimatedStyles} = AnimationFeatures();
 
   const getRandomQuestion = (): number =>
     Math.floor(Math.random() * (currentLesson.length - 1));
@@ -131,6 +133,7 @@ export const useLessonScreen = () => {
     soundPlay,
     showPronunciation,
     progressBarValue,
+    bounceAnimatedStyles,
     t,
   };
 };
