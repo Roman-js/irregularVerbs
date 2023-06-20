@@ -54,7 +54,7 @@ export const useLessonScreen = () => {
   const formWord = activeQuestion[`v${form}` as keyof VerbType];
   const translation = activeQuestion[locale as keyof VerbType];
 
-  const soundPlay = (soundTitle: string) => {
+  const soundPlay = useCallback((soundTitle: string) => {
     const soundVar = new Sound(
       soundRequires[soundTitle],
       //Sound.MAIN_BUNDLE,
@@ -68,7 +68,7 @@ export const useLessonScreen = () => {
       soundVar.play();
     }, 100);
     //soundVar.release();
-  };
+  }, []);
 
   const onPressCheck = () => {
     setLocalState({...localState, showPronunciation: true});
