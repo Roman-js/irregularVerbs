@@ -20,6 +20,8 @@ const languageDetector: LanguageDetectorAsyncModule = {
   cacheUserLanguage: async function (language: string) {
     try {
       const userLanguage = language !== locale ? locale : language;
+      console.log('userLanguage: ', userLanguage);
+
       await AsyncStorage.setItem(STORE_LANG_KEY, userLanguage);
     } catch (error) {
       console.log('Error writting language', error);

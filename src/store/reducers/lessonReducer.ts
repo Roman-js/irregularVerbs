@@ -5,7 +5,7 @@ type initialStateType = {
 };
 
 const initialState: initialStateType = {
-  soundAvailable: false,
+  soundAvailable: true,
 };
 
 export const lessonReducer = (state = initialState, action: ActionTypes) => {
