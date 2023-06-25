@@ -1,5 +1,5 @@
 import React from 'react';
-import {ImageBackground, TextInput} from 'react-native';
+import {ImageBackground, TextInput, View} from 'react-native';
 import {styles} from './styles';
 import {useLessonScreen} from './hooks/useLessonScreen';
 import Typography from '../../components/Typography';
@@ -63,24 +63,20 @@ export const LessonScreen = () => {
       />
 
       {showPronunciation ? (
-        <Animated.View style={[styles.soundContainer]}>
-          {Array(3)
-            .fill('')
-            .map((value, index) => (
-              <SoundButton
-                key={index}
-                onPress={() =>
-                  soundPlay(
-                    activeQuestion[`v${index + 1}` as keyof VerbType] as string,
-                  )
-                }
-                version={index + 1}
-                title={
-                  activeQuestion[`v${index + 1}` as keyof VerbType] as string
-                }
-              />
-            ))}
-        </Animated.View>
+        <View style={styles.soundContainer}>
+          {[...Array(3).keys()].map(item => (
+            <SoundButton
+              key={item}
+              onPress={() =>
+                soundPlay(
+                  activeQuestion[`v${item + 1}` as keyof VerbType] as string,
+                )
+              }
+              version={item + 1}
+              title={activeQuestion[`v${item + 1}` as keyof VerbType] as string}
+            />
+          ))}
+        </View>
       ) : (
         <TextInput
           style={styles.input}

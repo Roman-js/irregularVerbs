@@ -1,4 +1,8 @@
 {
   "name": "IrregularVerbsOwnProject",
-  "displayName": "IrregularVerbsOwnProject"
+  "displayName": "IrregularVerbsOwnProject",
+  "@react-native-admob/admob": {
+    "android_app_id": "ca-app-pub-2125675068430292~1061055091",
+    "ios_app_id": "ca-app-pub-2125675068430292~6313381773"
+  }
 }
