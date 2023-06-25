@@ -12,6 +12,7 @@
     "prettier": "npx prettier --write \"**/*.{js,jsx,ts,tsx,json}\" && npx prettier --write \"*.{js,jsx,ts,tsx,json}\""
   },
   "dependencies": {
+    "@react-native-admob/admob": "^2.0.1",
     "@react-native-async-storage/async-storage": "^1.18.1",
     "@react-native-community/masked-view": "^0.1.11",
     "@react-navigation/bottom-tabs": "^6.5.7",

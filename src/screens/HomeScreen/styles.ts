@@ -4,6 +4,8 @@ export const styles = StyleSheet.create({
   linearGradient: {
     flex: 1,
     paddingTop: 50,
+    alignItems: 'center',
+    justifyContent: 'flex-end',
   },
   flatListStyle: {
     width: '100%',
@@ -11,4 +13,5 @@ export const styles = StyleSheet.create({
   flatListContainer: {
     alignItems: 'center',
   },
+  banner: {zIndex: 10, position: 'absolute'},
 });

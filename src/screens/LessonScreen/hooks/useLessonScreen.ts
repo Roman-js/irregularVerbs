@@ -86,15 +86,14 @@ export const useLessonScreen = () => {
   };
 
   const onPressContinue = () => {
-    if (currentLesson.length === 1) {
+    if (currentLesson.length === 10) {
       const numberOfNextStep = currentStep + 1;
       availableStep === currentStep &&
         dispatch(setAvailableStepAction(numberOfNextStep));
       availableStep < numberOfNextStep && setSavedStep(numberOfNextStep);
-      navigation.navigate('HomeScreen');
+      navigation.navigate('LevelCompletedScreen');
       return;
     }
-
     setLocalState({
       ...localState,
       currentQuestion: getRandomQuestion(),

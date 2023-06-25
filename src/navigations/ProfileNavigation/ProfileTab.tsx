@@ -1,13 +1,23 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
+import {ProfileScreen} from '../../screens/ProfileScreen/ProfileScreen';
 
-export type ProfileTabParamList = {};
+export type ProfileTabParamList = {
+  ProfileScreen?: {};
+};
 
-//@typescript-eslint/no-unused-vars: off
-const HomeTabStack = createStackNavigator<ProfileTabParamList>();
+const ProfileTabStack = createStackNavigator<ProfileTabParamList>();
 
 const ProfileTab = () => {
-  return <></>;
+  return (
+    <ProfileTabStack.Navigator>
+      <ProfileTabStack.Screen
+        name="ProfileScreen"
+        component={ProfileScreen}
+        options={{headerShown: false}}
+      />
+    </ProfileTabStack.Navigator>
+  );
 };
 
 export default ProfileTab;
