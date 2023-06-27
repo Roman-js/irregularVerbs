@@ -10,7 +10,7 @@ import {styles} from './styles';
 type ProfileScreenType = {};
 
 export const ProfileScreen: FC<ProfileScreenType> = (): JSX.Element => {
-  const {valueOfProgress, spiritAnimal, t, removeMyProgress} =
+  const {valueOfProgress, spiritAnimal, t, removeMyProgress, activeDaysValue} =
     useProfileScreen();
   return (
     <SafeAreaView style={styles.container}>
@@ -22,7 +22,9 @@ export const ProfileScreen: FC<ProfileScreenType> = (): JSX.Element => {
           subtitle={'your progress'}
         />
         <View style={styles.indicatorDescription}>
-          <Typography.H1>5{' ' + t('Main.daylimited')}</Typography.H1>
+          <Typography.H1>
+            {activeDaysValue + ' ' + t('Main.daylimited')}
+          </Typography.H1>
           <Typography.H2>{t('Main.streaktooltip')}</Typography.H2>
         </View>
       </View>

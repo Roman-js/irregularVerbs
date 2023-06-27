@@ -4,19 +4,24 @@ import {useNavigation} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
 import {StackNavigationProp} from '@react-navigation/stack';
 import Sound from 'react-native-sound';
-import {soundRequires} from '../../../constants/soundRequires';
-import {verbContent} from '../../../constants/verbContent';
+import {soundRequires} from '../../../constants/content/soundRequiresContent';
+import {verbContent} from '../../../constants/content/verbContent';
 import {AppStateType} from '../../../store/store';
 import {VerbType} from '../../../types/lessonContentTypes';
 import {locale} from '../../../utils/locale';
 import {
   setAvailableStepAction,
   setCurrentLessonAction,
+  setActivityCounter,
 } from '../../../store/actions/actions';
 
 import {HomeTabParamList} from '../../../navigations/HomeNavigation/HomeTab';
-import {setSavedStep} from '../../../utils/savedSteps';
 import {AnimationFeatures} from '../../../utils/animations';
+import {dateCounter} from '../../../utils/dateCounter';
+import {
+  setActivityValue,
+  setSavedStep,
+} from '../../../services/api/asyncStorage';
 
 type LoacalStateType = {
   currentQuestion: number;
@@ -29,9 +34,10 @@ export const useLessonScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation<StackNavigationProp<HomeTabParamList>>();
 
-  const {currentLesson, currentStep, availableStep} = useSelector(
+  const {currentStep, availableStep, activityCounterDates} = useSelector(
     (state: AppStateType) => state.home,
   );
+  const {currentLesson} = useSelector((state: AppStateType) => state.lesson);
   const {soundAvailable} = useSelector((state: AppStateType) => state.lesson);
   const {bounceAnimatedStyles} = AnimationFeatures();
 
@@ -85,12 +91,30 @@ export const useLessonScreen = () => {
     });
   };
 
+  const saveProgress = (numberOfNextStep: number) => {
+    setSavedStep(numberOfNextStep);
+    const isApprovedActivityLastDate = dateCounter(
+      activityCounterDates.lastChangesDate,
+    );
+    const isApprovedActivityStartDate = dateCounter(
+      activityCounterDates.startDate,
+    );
+    if (isApprovedActivityStartDate || isApprovedActivityLastDate === 1) {
+      const modifiedActivityCounter = {
+        ...activityCounterDates,
+        lastChangesDate: new Date(),
+      };
+      dispatch(setActivityCounter(modifiedActivityCounter));
+      setActivityValue(modifiedActivityCounter);
+    }
+  };
+
   const onPressContinue = () => {
-    if (currentLesson.length === 10) {
+    if (currentLesson.length === 1) {
       const numberOfNextStep = currentStep + 1;
       availableStep === currentStep &&
         dispatch(setAvailableStepAction(numberOfNextStep));
-      availableStep < numberOfNextStep && setSavedStep(numberOfNextStep);
+      availableStep < numberOfNextStep && saveProgress(numberOfNextStep);
       navigation.navigate('LevelCompletedScreen');
       return;
     }

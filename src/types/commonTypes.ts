@@ -3,3 +3,8 @@ export enum STATUSSTEP {
   ACTIVE = 'active',
   DISABLED = 'disabled',
 }
+
+export type ActivityCounterType = {
+  startDate: Date;
+  lastChangesDate: Date;
+};

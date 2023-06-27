@@ -5,10 +5,17 @@ import {HIDED_TAB_SCREENS_DATA} from '../../constants/nav';
 import {
   setHideTabNavigationAction,
   setAvailableStepAction,
+  setActivityCounter,
 } from '../../store/actions/actions';
 import {AppStateType} from '../../store/store';
+import {ActivityCounterType} from '../../types/commonTypes';
+import {
+  getActivityValue,
+  setActivityValue,
+  getSavedStep,
+} from '../../services/api/asyncStorage';
+import {dateCounter} from '../../utils/dateCounter';
 import {navRef} from '../../utils/rootNav';
-import {getSavedStep} from '../../utils/savedSteps';
 
 export const useRootNavigation = () => {
   const dispatch = useDispatch();
@@ -18,7 +25,26 @@ export const useRootNavigation = () => {
   useEffect(() => {
     (async () => {
       const savedStep: string = (await getSavedStep()) || '1';
+      const progressStartDdate: ActivityCounterType = await getActivityValue();
       dispatch(setAvailableStepAction(Number(savedStep)));
+
+      const breakDays = dateCounter(progressStartDdate.lastChangesDate);
+      const defaultDate = new Date();
+
+      if (breakDays > 1) {
+        dispatch(
+          setActivityCounter({
+            startDate: defaultDate,
+            lastChangesDate: defaultDate,
+          }),
+        );
+        setActivityValue({
+          startDate: defaultDate,
+          lastChangesDate: defaultDate,
+        });
+      } else {
+        dispatch(setActivityCounter(progressStartDdate));
+      }
     })();
   }, [dispatch]);
 

@@ -1,4 +1,4 @@
-import {VerbType} from '../types/lessonContentTypes';
+import {VerbType} from '../../types/lessonContentTypes';
 
 export const verbContent: VerbType[] = [
   {
