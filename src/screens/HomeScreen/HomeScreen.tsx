@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import LinearGradient from 'react-native-linear-gradient';
-import {lessonContent} from '../../constants/lessonContent';
+import {lessonContent} from '../../constants/content/lessonContent';
 import {StepImage} from '../../components/StepImage/StepImage';
 import {colors} from '../../constants/colors';
 import {styles} from './styles';

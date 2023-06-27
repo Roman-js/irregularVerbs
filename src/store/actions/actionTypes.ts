@@ -1,3 +1,4 @@
+import {ActivityCounterType} from '../../types/commonTypes';
 import {ExerciseType} from '../../types/lessonContentTypes';
 
 export const AVAILABLESTEPACTION = 'AVAILABLESTEPACTION';
@@ -5,6 +6,7 @@ export const CURRENTLESSON = 'CURRENTLESSON';
 export const SOUNDAVAILABLE = 'SOUNDAVAILABLE';
 export const CURRENTSTEP = 'CURRENTSTEP';
 export const HIDETABNAVIGATION = 'HIDETABNAVIGATION';
+export const ACTIVITYCOUNTER = 'ACTIVITYCOUNTER';
 
 export type SetAvailableStepActionType = {
   type: typeof AVAILABLESTEPACTION;
@@ -30,7 +32,13 @@ export type setHideTabNavigationType = {
   payload: boolean;
 };
 
+export type setActivityCounterType = {
+  type: typeof ACTIVITYCOUNTER;
+  payload: ActivityCounterType;
+};
+
 export type ActionTypes =
+  | setActivityCounterType
   | SetAvailableStepActionType
   | SetCurrentLessonType
   | SetSoundAvailableType

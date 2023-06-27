@@ -1,1 +1,3 @@
 export const STORAGE_STEP_KEY: string = 'STORAGE_STEP_KEY';
+export const STORE_LANG_KEY = '@lang';
+export const STORAGE_ACTIVITY_COUNTER_KEY = 'STORAGE_ACTIVITY_COUNTER_KEY';

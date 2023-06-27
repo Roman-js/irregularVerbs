@@ -3,8 +3,9 @@ import {initReactI18next} from 'react-i18next';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import {resources} from './langs';
-import {FALLBACK_LANG, STORE_LANG_KEY} from '../constants/lang';
+import {FALLBACK_LANG} from '../constants/lang';
 import {locale} from '../utils/locale';
+import {STORE_LANG_KEY} from '../constants/storage';
 
 const languageDetector: LanguageDetectorAsyncModule = {
   type: 'languageDetector',

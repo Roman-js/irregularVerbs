@@ -3,13 +3,15 @@ import {useDispatch, useSelector} from 'react-redux';
 import {AppStateType} from '../../../store/store';
 import {useTranslation} from 'react-i18next';
 import {setAvailableStepAction} from '../../../store/actions/actions';
-import {setSavedStep} from '../../../utils/savedSteps';
-import {rangeContent} from '../../../constants/rangeContent';
+import {setSavedStep} from '../../../services/api/asyncStorage';
+import {rangeContent} from '../../../constants/content/rangeContent';
 
 const removedProgressValue = 1;
 
 export const useProfileScreen = () => {
-  const {availableStep} = useSelector((state: AppStateType) => state.home);
+  const {availableStep, activeDaysValue} = useSelector(
+    (state: AppStateType) => state.home,
+  );
   const {t} = useTranslation();
   const dispatch = useDispatch();
 
@@ -24,7 +26,6 @@ export const useProfileScreen = () => {
       },
       {
         text: t('Main.quit') as string,
-        onPress: () => console.log('Ask me later pressed'),
         style: 'cancel',
       },
     ]);
@@ -38,6 +39,7 @@ export const useProfileScreen = () => {
     valueOfProgress: availableStep,
     spiritAnimal,
     removeMyProgress,
+    activeDaysValue,
     t,
   };
 };
