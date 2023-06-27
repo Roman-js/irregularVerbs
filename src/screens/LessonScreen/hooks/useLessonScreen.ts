@@ -13,6 +13,7 @@ import {
   setAvailableStepAction,
   setCurrentLessonAction,
   setActivityCounter,
+  setActivityDaysValue,
 } from '../../../store/actions/actions';
 
 import {HomeTabParamList} from '../../../navigations/HomeNavigation/HomeTab';
@@ -34,9 +35,8 @@ export const useLessonScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation<StackNavigationProp<HomeTabParamList>>();
 
-  const {currentStep, availableStep, activityCounterDates} = useSelector(
-    (state: AppStateType) => state.home,
-  );
+  const {currentStep, availableStep, activityCounterDates, activeDaysValue} =
+    useSelector((state: AppStateType) => state.home);
   const {currentLesson} = useSelector((state: AppStateType) => state.lesson);
   const {soundAvailable} = useSelector((state: AppStateType) => state.lesson);
   const {bounceAnimatedStyles} = AnimationFeatures();
@@ -99,6 +99,12 @@ export const useLessonScreen = () => {
     const isApprovedActivityStartDate = dateCounter(
       activityCounterDates.startDate,
     );
+
+    if (!activeDaysValue) {
+      dispatch(setActivityDaysValue(1));
+      return;
+    }
+
     if (isApprovedActivityStartDate || isApprovedActivityLastDate === 1) {
       const modifiedActivityCounter = {
         ...activityCounterDates,

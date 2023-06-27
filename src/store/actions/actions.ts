@@ -6,13 +6,15 @@ import {
   SOUNDAVAILABLE,
   CURRENTSTEP,
   HIDETABNAVIGATION,
+  ACTIVITYVALUE,
+  ACTIVITYCOUNTER,
   SetAvailableStepActionType,
   SetCurrentLessonType,
   setCurrentStepType,
   SetSoundAvailableType,
   setHideTabNavigationType,
   setActivityCounterType,
-  ACTIVITYCOUNTER,
+  setActivityDaysValueType,
 } from './actionTypes';
 
 export const setAvailableStepAction = (
@@ -49,5 +51,12 @@ export const setActivityCounter = (
   payload: ActivityCounterType,
 ): setActivityCounterType => ({
   type: ACTIVITYCOUNTER,
+  payload,
+});
+
+export const setActivityDaysValue = (
+  payload: number,
+): setActivityDaysValueType => ({
+  type: ACTIVITYVALUE,
   payload,
 });
