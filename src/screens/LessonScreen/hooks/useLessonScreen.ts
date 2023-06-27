@@ -23,11 +23,13 @@ import {
   setActivityValue,
   setSavedStep,
 } from '../../../services/api/asyncStorage';
+import {Keyboard} from 'react-native';
 
 type LoacalStateType = {
   currentQuestion: number;
   inputValue: string;
   showPronunciation: boolean;
+  wrongAnswer: boolean;
 };
 
 export const useLessonScreen = () => {
@@ -48,9 +50,11 @@ export const useLessonScreen = () => {
     currentQuestion: getRandomQuestion() || 0,
     inputValue: '',
     showPronunciation: false,
+    wrongAnswer: false,
   });
 
-  const {currentQuestion, inputValue, showPronunciation} = localState;
+  const {currentQuestion, inputValue, showPronunciation, wrongAnswer} =
+    localState;
   const {verbid, form} = currentLesson[currentQuestion];
   const progressBarValue = 1 - currentLesson.length / 12;
 
@@ -77,9 +81,16 @@ export const useLessonScreen = () => {
   }, []);
 
   const onPressCheck = () => {
-    setLocalState({...localState, showPronunciation: true});
+    Keyboard.dismiss();
     if (inputValue === formWord) {
+      setLocalState({...localState, showPronunciation: true});
       soundAvailable && soundPlay(inputValue);
+    } else {
+      setLocalState({
+        ...localState,
+        showPronunciation: true,
+        wrongAnswer: true,
+      });
     }
   };
 
@@ -88,6 +99,7 @@ export const useLessonScreen = () => {
       ...localState,
       currentQuestion: getRandomQuestion(),
       inputValue: '',
+      wrongAnswer: false,
     });
   };
 
@@ -101,7 +113,14 @@ export const useLessonScreen = () => {
     );
 
     if (!activeDaysValue) {
+      const dateOffset = 24 * 60 * 60 * 1000; //1 day
+      const myDate = new Date();
+
       dispatch(setActivityDaysValue(1));
+      setActivityValue({
+        ...activityCounterDates,
+        startDate: new Date(myDate.setTime(myDate.getTime() - dateOffset)),
+      });
       return;
     }
 
@@ -129,6 +148,7 @@ export const useLessonScreen = () => {
       currentQuestion: getRandomQuestion(),
       inputValue: '',
       showPronunciation: false,
+      wrongAnswer: false,
     });
 
     if (inputValue === formWord) {
@@ -163,6 +183,7 @@ export const useLessonScreen = () => {
     showPronunciation,
     progressBarValue,
     bounceAnimatedStyles,
+    wrongAnswer,
     t,
   };
 };
