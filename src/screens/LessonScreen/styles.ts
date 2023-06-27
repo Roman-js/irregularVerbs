@@ -43,6 +43,11 @@ export const styles = StyleSheet.create({
     shadowColor: colors.black,
     shadowOpacity: 1,
     elevation: 3,
+    fontSize: 16,
+  },
+  inputError: {
+    color: colors.red,
+    textDecorationLine: 'line-through',
   },
   buttonContainer: {
     flexDirection: 'row',
@@ -57,4 +62,9 @@ export const styles = StyleSheet.create({
     marginTop: 5,
   },
   progress: {margin: 10},
+  sentenceTitle: {
+    color: colors.green,
+    textAlign: 'center',
+  },
+  sentenceValue: {textAlign: 'center'},
 });

@@ -7,6 +7,7 @@ export const SOUNDAVAILABLE = 'SOUNDAVAILABLE';
 export const CURRENTSTEP = 'CURRENTSTEP';
 export const HIDETABNAVIGATION = 'HIDETABNAVIGATION';
 export const ACTIVITYCOUNTER = 'ACTIVITYCOUNTER';
+export const ACTIVITYVALUE = 'ACTIVITYVALUE';
 
 export type SetAvailableStepActionType = {
   type: typeof AVAILABLESTEPACTION;
@@ -37,7 +38,13 @@ export type setActivityCounterType = {
   payload: ActivityCounterType;
 };
 
+export type setActivityDaysValueType = {
+  type: typeof ACTIVITYVALUE;
+  payload: number;
+};
+
 export type ActionTypes =
+  | setActivityDaysValueType
   | setActivityCounterType
   | SetAvailableStepActionType
   | SetCurrentLessonType

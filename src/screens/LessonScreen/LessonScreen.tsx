@@ -31,6 +31,7 @@ export const LessonScreen = () => {
     onPressContinue,
     progressBarValue,
     bounceAnimatedStyles,
+    wrongAnswer,
   } = useLessonScreen();
 
   return (
@@ -62,33 +63,43 @@ export const LessonScreen = () => {
         style={styles.progress}
       />
 
+      <TextInput
+        style={[styles.input, wrongAnswer && styles.inputError]}
+        value={inputValue}
+        editable={!showPronunciation}
+        autoFocus={true}
+        autoCapitalize="none"
+        textAlign="center"
+        autoCorrect={false}
+        onChangeText={setInputValueToLowerCase}
+      />
+
       {showPronunciation ? (
-        <View style={styles.soundContainer}>
-          {[...Array(3).keys()].map(item => (
-            <SoundButton
-              key={item}
-              onPress={() =>
-                soundPlay(
-                  activeQuestion[`v${item + 1}` as keyof VerbType] as string,
-                )
-              }
-              version={item + 1}
-              title={activeQuestion[`v${item + 1}` as keyof VerbType] as string}
-            />
-          ))}
-        </View>
-      ) : (
-        <TextInput
-          style={styles.input}
-          value={inputValue}
-          editable={!showPronunciation}
-          autoFocus={true}
-          autoCapitalize="none"
-          textAlign="center"
-          autoCorrect={false}
-          onChangeText={setInputValueToLowerCase}
-        />
-      )}
+        <>
+          <View style={styles.soundContainer}>
+            {[...Array(3).keys()].map(item => (
+              <SoundButton
+                key={item}
+                onPress={() =>
+                  soundPlay(
+                    activeQuestion[`v${item + 1}` as keyof VerbType] as string,
+                  )
+                }
+                version={item + 1}
+                title={
+                  activeQuestion[`v${item + 1}` as keyof VerbType] as string
+                }
+              />
+            ))}
+          </View>
+          <Typography.H1 style={styles.sentenceTitle}>
+            {t('Main.sentenceTitle')}
+          </Typography.H1>
+          <Typography.H2 style={styles.sentenceValue}>
+            {activeQuestion[`v${form}sentence` as keyof VerbType]}
+          </Typography.H2>
+        </>
+      ) : null}
       <Animated.View style={[styles.buttonContainer, bounceAnimatedStyles]}>
         <LessonButton
           onPress={onPressSkip}
@@ -98,7 +109,11 @@ export const LessonScreen = () => {
         {showPronunciation ? (
           <LessonButton onPress={onPressContinue} title={t('Main.continue')} />
         ) : (
-          <LessonButton onPress={onPressCheck} title={t('Main.check')} />
+          <LessonButton
+            onPress={onPressCheck}
+            title={t('Main.check')}
+            disabled={!inputValue}
+          />
         )}
       </Animated.View>
     </ImageBackground>

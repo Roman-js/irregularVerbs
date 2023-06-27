@@ -3,6 +3,7 @@ import {dateCounter} from '../../utils/dateCounter';
 import {
   ActionTypes,
   ACTIVITYCOUNTER,
+  ACTIVITYVALUE,
   AVAILABLESTEPACTION,
   CURRENTSTEP,
   HIDETABNAVIGATION,
@@ -46,6 +47,8 @@ export const homeReducer = (
         activeDaysValue: countOfActivitieDays,
       };
     }
+    case ACTIVITYVALUE:
+      return {...state, activeDaysValue: action.payload};
     default:
       return state;
   }
